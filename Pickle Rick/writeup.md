@@ -52,7 +52,8 @@ robots.txt
 
 +) There are some file text which can be the ingredients. However, when i try to cat the file, it doesn’t work.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/0051f2f0-1646-4504-bd84-e934e510268c/6d02494c-9b83-466e-8a65-431f3def1f28/Untitled.png)
+![Screenshot 2024-03-17 105321](https://github.com/vdh1612/try_hack_me_ctf/assets/125654739/b7ff8a3e-9d1d-4b26-98e6-ccd77db2723b)
+
 
  +)  pwd show that we are in **/var/www/html** and whoami shows that we are user **www-data**
 
