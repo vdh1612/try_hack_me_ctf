@@ -260,6 +260,10 @@ sudo cat /root/3rd.txt
 ```
 
 [Explaination]
++) Socket is a concept in network programming, used to establish connections between computers or applications on a network. 
+
++) A socket allows applications on different computers to transmit and receive data to each other over a network. Specifically, a socket includes an IP address and a port, creating a two-way communication channel between two computers. When data is sent through the socket from one side, it will be received by the corresponding socket on the destination computer, and vice versa.
+
 
 ```
 // socket for creating network connections, subprocess for executing cmd, os for low-level operating system operations.
