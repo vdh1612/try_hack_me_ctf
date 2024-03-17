@@ -195,7 +195,7 @@ sudo grep . /root/3rd.txt
 => Question 3: fleeb juice
 ```
 
-[?] When we sudo to get the full privileges, we need the password of superuser right because we are user www-data right !
+[?] When we sudo to get the full privileges, we need the password of superuser because we are user www-data right !
 
 ```
 sudo grep . /etc/sudoers
