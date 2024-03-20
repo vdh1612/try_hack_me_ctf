@@ -1,0 +1,23 @@
+- Some typical Windows host will, with its default firewall, block all ICMP packets. If we ping, firewall will block us. The main problem is that Nmap ping to check whether server is alive by DEFAULT ⇒ Nmap will register a host with this firewall configuration as dead (bc firewall blocks us)
+- Fortunately Nmap provides an option for this: `-Pn` (Treat all hosts as online), which tells Nmap to not ping the host before scanning it. However, it takes long time to complete the scan (if host is dead) bc Nmap will always treat the target host(s) as being alive.
+- Some useful switches:
+    - `-f` - Used to fragment the packets into smaller pieces (less likely that the packets will be detected by a firewall or IDS).
+    - `--mtu <number>` - Accepts a maximum transmission unit size to use for the packets sent. (it must be a multiple of 8).
+    - `--scan-delay <time>ms` - used to add delay between packets sent. Useful if the **network is unstable**, to evade any **time-based firewall/IDS triggers**.
+    - `--badsum` - used to generate invalid checksum for packets. Can be used to **determine the presence of a firewall/IDS**. Usually this packet would be dropped, however, firewalls may potenitally respond automatically, without bothering to check the checksum of the packet.
+
+Which simple (and frequently relied upon) protocol is often blocked, requiring the use of the -Pn switch?
+
+Result: ICMP
+
+Which Nmap switch allows you to append an arbitrary length of random data to the end of packets?
+
+Result: --data-length
+
+```
+ ┌──(kali㉿kali)-[~]
+└─$ nmap -help    
+Nmap 7.93 ( https://nmap.org )
+....
+ --data-length <num>: Append random data to sent packets
+```
