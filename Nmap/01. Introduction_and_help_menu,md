@@ -1,0 +1,188 @@
+## [Introduction]
+
+- It is crucial that we begin any attack with a port scan and  Nmap can be used to perform many different kinds of port scan.
+- Every computer has a total of 65535 available ports; however, many of these are registered as standard ports:
+
+| Number | Assignment |
+| --- | --- |
+| 20 | https://en.wikipedia.org/wiki/File_Transfer_Protocol (FTP) Data Transfer |
+| 21 | https://en.wikipedia.org/wiki/File_Transfer_Protocol (FTP) Command Control |
+| 22 | https://en.wikipedia.org/wiki/Secure_Shell (SSH) Secure Login |
+| 23 | https://en.wikipedia.org/wiki/Telnet remote login service, unencrypted text messages |
+| 25 | https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol (SMTP) email delivery |
+| 53 | https://en.wikipedia.org/wiki/Domain_Name_System (DNS) service |
+| 67, 68 | https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol (DHCP) |
+| 80 | https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol (HTTP) used in the https://en.wikipedia.org/wiki/World_Wide_Web |
+| 110 | https://en.wikipedia.org/wiki/Post_Office_Protocol (POP3) |
+| 119 | https://en.wikipedia.org/wiki/Network_News_Transfer_Protocol (NNTP) |
+| 123 | https://en.wikipedia.org/wiki/Network_Time_Protocol (NTP) |
+| 143 | https://en.wikipedia.org/wiki/Internet_Message_Access_Protocol (IMAP) Management of digital mail |
+| 161 | https://en.wikipedia.org/wiki/Simple_Network_Management_Protocol (SNMP) |
+| 194 | https://en.wikipedia.org/wiki/Internet_Relay_Chat (IRC) |
+| 443 | https://en.wikipedia.org/wiki/HTTP_Secure (HTTPS) HTTP over TLS/SSL |
+| 546, 547 | https://en.wikipedia.org/wiki/DHCPv6 IPv6 version of DHCP |
+1. **Well-Known Ports (0-1023):**
+    - Reserved for system services and commonly used protocols. Examples include HTTP (80), HTTPS (443), FTP (21), and SSH (22).
+2. **Registered Ports (1024-49151):**
+    - Assigned by the Internet Assigned Numbers Authority (IANA) for specific applications or services. They are typically used by applications that aren't as universal as well-known ports. Examples include MySQL (3306) and HTTP Proxy (8080).
+3. **Dynamic or Private Ports (49152-65535):**
+    - Also known as ephemeral ports. They are used for dynamic, private, or temporary purposes. Many operating systems use these ports for client-side application communication.
+
+⇒ Depending on how the port responds, it can be determined as being open, closed, or filtered (usually by a firewall)
+
+1) What networking constructs are used to direct traffic to the right application on a server?
+
+Result: ports
+
+2) How many of these are available on any network-enabled computer?
+
+Result: 65535
+
+3) How many of these are considered "well-known"? 
+
+Result: 1024
+
+## [Nmap Switches]
+
+Open help menu for nmap (accessed with `nmap -h`) and/or the nmap man page (access with `man nmap`).
+
+```
+──(kali㉿kali)-[~/Downloads]
+└─$ nmap -h                
+Nmap 7.93 ( https://nmap.org )
+Usage: nmap [Scan Type(s)] [Options] {target specification}
+....
+```
+
+1) What is the first switch listed in the help menu for a 'Syn Scan' (more on this later!)?
+
+```
+SCAN TECHNIQUES:
+  -sS/sT/sA/sW/sM: TCP SYN/Connect()/ACK/Window/Maimon scans
+```
+
+Result: -sS
+
+2) Which switch would you use for a "UDP scan"?
+
+```
+SCAN TECHNIQUES:
+.....
+  -sU: UDP Scan
+```
+
+Result: -sU
+
+3) If you wanted to detect which operating system the target is running on, which switch would you use?
+
+```
+OS DETECTION:
+  -O: Enable OS detection
+```
+
+Result: -O
+
+4) Nmap provides a switch to detect the version of the services running on the target. What is this switch?
+
+```
+SERVICE/VERSION DETECTION:
+  -sV: Probe open ports to determine service/version info
+```
+
+Result: -sV
+
+5) The default output provided by nmap often does not provide enough information for a pentester. How would you increase the verbosity?
+
+```
+OUTPUT:
+.....
+  -v: Increase verbosity level (use -vv or more for greater effect)
+```
+
+Result: -v
+
+6) Verbosity level one is good, but verbosity level two is better! How would you set the verbosity level to two?
+
+Result: -vv
+
+**[saving the output of scans]** If we save the output of our scans, we will only need to run the scan once (reducing network traffic and thus chance of detection).
+
+7) What switch would you use to save the nmap results in three major formats?
+
+```
+  -oA <basename>: Output in the three major formats at once
+```
+
+Result: -oA
+
+8) What switch would you use to save the nmap results in a "normal" format?
+
+```
+-oN/-oX/-oS/-oG <file>: Output scan in normal, XML, s|<rIpt kIddi3,
+     and Grepable format, respectively, to the given filename.
+```
+
+Result: -oN
+
+9) A very useful output format: how would you save results in a "grepable" format?
+
+```
+ -oN/-oX/-oS/-oG <file>: Output scan in normal, XML, s|<rIpt kIddi3,
+     and Grepable format, respectively, to the given filename.
+```
+
+Result: -oG 
+
+**[Aggressive mode]** This is a shorthand switch that activates service detection, operating system detection, a traceroute and common script scanning.
+
+10) How would you activate this setting?
+
+```
+  -A: Enable OS detection, version detection, script scanning, and traceroute
+```
+
+Result: -A
+
+11) How would you set the timing template to level 5?
+
+```
+  -T<0-5>: Set timing template (higher is faster)
+```
+
+Result: 
+
+**[specific port to scan]**
+
+11) How would you tell nmap to only scan port 80?
+
+```
+ -p <port ranges>: Only scan specified ports
+    Ex: -p22; -p1-65535; -p U:53,111,137,T:21-25,80,139,8080,S:9
+```
+
+Result: -p 80
+
+12) How would you tell nmap to scan ports 1000-1500?
+
+Result: -p 1000-1500
+
+**[Useful options]**
+
+13) How would you tell nmap to scan all ports?
+
+Result: -p-
+
+14) How would you activate a script from the nmap scripting library (lots more on this later!)?
+
+```
+SCRIPT SCAN:
+  -sC: equivalent to --script=default
+  --script=<Lua scripts>: <Lua scripts> is a comma separated list of
+           directories, script-files or script-categories
+```
+
+Result: --script
+
+15) How would you activate all of the scripts in the "vuln" category?
+
+Result:  --script=vuln
