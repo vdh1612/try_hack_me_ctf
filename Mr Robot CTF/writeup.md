@@ -75,7 +75,7 @@ key-1-of-3.txt  // the first key
 
 - In login page, we know that in Mr.Robot film, there is a name Elliot, so we will try that name first
 
-![Screenshot 2024-04-29 104246.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0051f2f0-1646-4504-bd84-e934e510268c/c3aba19c-3378-456c-838a-c0860212c6af/Screenshot_2024-04-29_104246.png)
+![Screenshot 2024-04-29 104246](https://github.com/vdh1612/try_hack_me_ctf/assets/125654739/e429a901-b3db-442d-9436-553bd472d831)
 
                                      ⇒ so this username exists  
 
@@ -111,7 +111,8 @@ log=Elliot&pwd=§asdasd§&wp-submit=Log+In&redirect_to=http%3A%2F%2F10.10.153.21
 
 - Load payloads
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/0051f2f0-1646-4504-bd84-e934e510268c/988c07fd-2389-4e3e-b715-915e05e0f155/Untitled.png)
+![Screenshot 2024-04-29 105139](https://github.com/vdh1612/try_hack_me_ctf/assets/125654739/a3667a1f-001c-49a4-8ad0-b3bfb7b187c6)
+
 
 - We can notice that there is password `ER28-0652` has different length from others requests
     - The resonse:
@@ -138,11 +139,13 @@ log=Elliot&pwd=§asdasd§&wp-submit=Log+In&redirect_to=http%3A%2F%2F10.10.153.21
     
     - The length
         
-        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/0051f2f0-1646-4504-bd84-e934e510268c/f6c4c927-f9f1-4106-afd2-188c9b560f71/Untitled.png)
+        ![Screenshot 2024-04-29 110441](https://github.com/vdh1612/try_hack_me_ctf/assets/125654739/94c6b9da-d0a2-44a5-a2c1-8f5e84638570)
+
         
     - Here is admin page after loginning successfully
     
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/0051f2f0-1646-4504-bd84-e934e510268c/fd0675ee-80bd-4939-910d-b8af1cd4d533/Untitled.png)
+    ![Screenshot 2024-04-29 110844](https://github.com/vdh1612/try_hack_me_ctf/assets/125654739/fafc1fd4-4ce9-474e-a168-1778152c6f79)
+
     
 - In url http://10.10.153.211/wp-admin/theme-editor.php?file=404.php&theme=twentyfifteen, we can see that all the source code from file php be displayed here
 
