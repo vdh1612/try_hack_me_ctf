@@ -258,7 +258,7 @@ get_header(); ?>
     
     [?] How to fix this
     
-    - **We have spawn an Interactive Shell**:
+    - **We have to spawn an Interactive Shell**:
     
     ```
     daemon@linux:/home$ python -c 'import pty; pty.spawn("/bin/bash")'
