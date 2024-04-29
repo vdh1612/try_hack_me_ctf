@@ -115,7 +115,7 @@ log=Elliot&pwd=§asdasd§&wp-submit=Log+In&redirect_to=http%3A%2F%2F10.10.153.21
 
 
 - We can notice that there is password `ER28-0652` has different length from others requests
-    - The resonse:
+    - The response:
     
     ```
     HTTP/1.1 302 Found
